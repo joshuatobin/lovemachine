@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+
+require_relative "../lib/lovemachine"
+include LoveMachine::Model
+
+require "irb"
+require "irb/completion"
+
+IRB.start

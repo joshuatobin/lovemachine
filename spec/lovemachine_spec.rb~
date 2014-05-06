@@ -1,0 +1,37 @@
+require File.expand_path '../helper_spec.rb', __FILE__
+require 'lovemachine'
+
+include Rack::Test::Methods
+
+def app
+  LoveMachine
+end
+
+describe "Creating Love" do
+  def setup()
+    post '/user', { :email => "user@heroku.com" }.to_json, "CONTENT_TYPE" => "application/json" 
+    post '/user', { :email => "user2@heroku.com" }.to_json, "CONTENT_TYPE" => "application/json" 
+  end
+  
+  it "should successfully send love" do
+    post '/love', { :to => "user@heroku.com", :from => "user2@heroku.com", :message => "First love" }.to_json, "CONTENT_TYPE" => "application/json" 
+    assert_equal(201, last_response.status)
+  end
+
+  it "should successfully return love" do
+    get '/love'
+    assert_equal(200, last_response.status)
+  end
+end
+
+describe "Creating Users" do
+  it "should successfully add a user" do
+    post '/user', { :email => "user@example.com" }.to_json, "CONTENT_TYPE" => "application/json" 
+    assert_equal(201, last_response.status)
+    last_response.body.must_include 'User successfully created'
+  end
+end
+
+
+
+
