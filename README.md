@@ -18,14 +18,15 @@ $ heroku run bin/console
 k = APIkey.create()
 k.key
 $ heroku restart # Restart the dyno to pick up the model changes
+```
 
 If using gmail for SMTP you'll need to [unlock the account for clients connecting from EC2](http://www.google.com/accounts/DisplayUnlockCaptcha)
-```
 
 ## TODO:
 * Force SSL
 * Migrate app to use [Pliny](https://github.com/interagent/pliny)
 * Update app to use JSON schema
+* Add delete methods
 
 
 ## User
